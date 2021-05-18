@@ -18,10 +18,10 @@ const Title = styled.h1`
   font-weight: bold;
 `;
 
- const Header = () => (
+ const Header = ({users, name, onChangeUser}) => (
   <HeaderLayout>
     <Title>Voting Page</Title>
-    <Dropdown />
+    <Dropdown options={users} defaultValue={name} onChange={onChangeUser}/>
   </HeaderLayout>
 );
 

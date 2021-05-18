@@ -64,7 +64,7 @@ const Item = ({id, name, onSelect}) => (
 	</li>
 );
 
-const Dropdown = ({options, defaultValue}) => {
+const Dropdown = ({options, defaultValue, onChange}) => {
 	const [value, setValue] = useState(defaultValue);
   const [isActive, setIsActive] = useState(false);
   const onClick = () => {
@@ -72,6 +72,7 @@ const Dropdown = ({options, defaultValue}) => {
 	};
 
 	const onSelect = (e) => {
+		onChange(e.target.innerText);
 		setValue(e.target.innerText);
 		setIsActive(!isActive);
 	}
@@ -86,7 +87,7 @@ const Dropdown = ({options, defaultValue}) => {
 		</Button>
 		<Options className={isActive ? 'active' : 'inactive'}>
 			{
-				options.map(item => <Item key={item} name={item} onSelect={onSelect}/>)
+				options.map(item => <Item key={item.id + item.name} name={item.name} onSelect={onSelect}/>)
 			}
 		</Options>
 	</Wrapper>
@@ -95,6 +96,7 @@ const Dropdown = ({options, defaultValue}) => {
 Dropdown.defaultProps = {
 	options : ['아구몬', '피카츄', '야도란'],
 	defaultValue : '기본',
+	onChange: () => {},
 }
 
 export default Dropdown;

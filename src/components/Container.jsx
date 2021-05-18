@@ -18,18 +18,18 @@ const Header = styled.section`
 	justify-content: space-between;
 `;
 
-const username = '아구몬';
-
-const Container = (props) => (
-    <Wrapper>
-			<Header>
-				<UserInfo>안녕하세요. {username}님!</UserInfo>
-				<CommonBtn name={'투표 생성'}/>
-			</Header>
+const Container = (props) => {
+	const user = props.user;
+	return (
+	<Wrapper>
+		<Header>
+			<UserInfo>	안녕하세요. {user.name}님!</UserInfo>
+			<CommonBtn name={'투표 생성'}/>
+		</Header>
 			<section>
 				{props.children}
 			</section>
-    </Wrapper>
-)
+	</Wrapper>
+)}
 
 export default Container;
