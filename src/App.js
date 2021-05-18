@@ -1,9 +1,14 @@
 import './App.css';
+import { Header, Container, CardList } from './components';
 
 function App() {
   return (
     <div className="App">
-      <h1>Voting Page</h1>
+      <Header />
+      <Container>
+        <CardList title={'진행중인 투표'} />
+        <CardList title={'종료된 투표'} />
+      </Container>
     </div>
   );
 }
