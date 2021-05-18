@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Dropdown from './Dropdown';
 
 const HeaderLayout = styled.header`
   width: 100%;
@@ -20,9 +21,7 @@ const Title = styled.h1`
  const Header = () => (
   <HeaderLayout>
     <Title>Voting Page</Title>
-    <div>
-      select box
-    </div>
+    <Dropdown />
   </HeaderLayout>
 );
 
