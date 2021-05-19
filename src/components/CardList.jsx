@@ -12,8 +12,10 @@ const Wrapper = styled.section`
   padding: 20px;
   min-height: 170px;
   display: flex;
-  align-items: center;
-  margin-bottom: 30px;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 30px;
+	flex-direction: column;
 `;
 
 const NoCard = styled.h1`
@@ -22,31 +24,45 @@ const NoCard = styled.h1`
   font-size: 18px;
 `;
 
-const MoreList = styled.button`
-  text-align: center;
-  width: 100%;
-  font-size: 18px;
+const CardContainer = styled.section`
+	width: 100%;
+	
+	> div {
+		display: flex;
+    flex-flow: wrap;
+	}
 `;
 
-const CardList = ({title, cardList, ...props}) => (
+const MoreBtn = styled.button`
+	width: 100%;
+	font-size: 18px;
+	margin: 10px 0;
+	padding: 10px;
+`;
+
+
+const CardList = ({title, cardList, ...props}) => {
+	return (
 	<section>
 		<Title>{title}</Title>
 		<Wrapper>
 			{
 				cardList.length === 0 ?
 				<NoCard>해당되는 투표가 없습니다.</NoCard> :
-				<div>
-					{props.children}
+				<CardContainer>
+					<div>
+						{props.children}
+					</div>
 					{
-						cardList.length >= 4
-						&& 
-						<MoreList>더보기</MoreList>
+						cardList.length >= 2
+						&&
+						<MoreBtn>더보기</MoreBtn>
 					}
-				</div>
+				</CardContainer>
 			}
 		</Wrapper>
 	</section>
-);
+)};
 
 CardList.defaultProps = {
 	title: '',
