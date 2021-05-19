@@ -26,13 +26,14 @@ const TextInput = styled.input`
   text-align: right;
 `;
 
-const DatePicker = () => {
+const DatePicker = ({startDate, endDate, onChangeDate}) => {
+  // TODO : 날짜 비교. 마감일을 시작일보다 이전으로 불가능하게
   return (
     <Wrapper>
       <label><Label>기간</Label></label>
-      <TextInput type='date'/>
+      <TextInput name={'start'} type='date' value={startDate} onChange={onChangeDate}/>
       <p> ~ </p>
-      <TextInput type='date'/>
+      <TextInput name={'end'} type='date' value={endDate}  onChange={onChangeDate}/>
     </Wrapper>
   );
 };
