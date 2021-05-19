@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/voteProject/static/css/main.33be6e3b.chunk.css",
+    "main.css": "/voteProject/static/css/main.4e4f1dfd.chunk.css",
     "main.js": "/voteProject/static/js/main.96f919ef.chunk.js",
     "main.js.map": "/voteProject/static/js/main.96f919ef.chunk.js.map",
     "runtime-main.js": "/voteProject/static/js/runtime-main.39692479.js",
@@ -10,7 +10,7 @@
     "static/js/3.a3781564.chunk.js": "/voteProject/static/js/3.a3781564.chunk.js",
     "static/js/3.a3781564.chunk.js.map": "/voteProject/static/js/3.a3781564.chunk.js.map",
     "index.html": "/voteProject/index.html",
-    "static/css/main.33be6e3b.chunk.css.map": "/voteProject/static/css/main.33be6e3b.chunk.css.map",
+    "static/css/main.4e4f1dfd.chunk.css.map": "/voteProject/static/css/main.4e4f1dfd.chunk.css.map",
     "static/js/2.fe6126f6.chunk.js.LICENSE.txt": "/voteProject/static/js/2.fe6126f6.chunk.js.LICENSE.txt",
     "static/media/arrow_down.eca67a56.svg": "/voteProject/static/media/arrow_down.eca67a56.svg",
     "static/media/arrow_up.5b19f08e.svg": "/voteProject/static/media/arrow_up.5b19f08e.svg"
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.39692479.js",
     "static/js/2.fe6126f6.chunk.js",
-    "static/css/main.33be6e3b.chunk.css",
+    "static/css/main.4e4f1dfd.chunk.css",
     "static/js/main.96f919ef.chunk.js"
   ]
 }
