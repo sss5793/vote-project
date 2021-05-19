@@ -45,8 +45,8 @@ export const voteList = [
         id: 0,
         title: '오늘 뭐 먹지?',
         userId: 0,
-        startDate : new Date('2020-05-03'),
-        endDate : new Date('2020-05-03'),
+        startDate : new Date('2021-05-03'),
+        endDate : new Date('2021-05-03'),
         isClosed: true,
         voteItem : [
             {
@@ -70,8 +70,8 @@ export const voteList = [
         id: 1,
         title: '내일 뭐하지?',
         userId: 1,
-        startDate : new Date('2020-05-20'),
-        endDate : new Date('2020-05-21'),
+        startDate : new Date('2021-05-20'),
+        endDate : new Date('2021-05-21'),
         isClosed: false,
         voteItem : [
             {

@@ -1,29 +1,24 @@
 import styled from 'styled-components';
+import Wrapper from './Wrapper';
 import Dropdown from '../Dropdown';
 import Header from './Header';
 import VoteInfo from './VoteInfo';
 import PurpleBtn from './PurpleBtn';
+import { users } from '../../mocks';
 
-const Wrapper = styled.article`
-	width: 300px;
-	height: 130px;
-	background: #fff;
-	border-radius: 3px;
-	padding: 15px;
-
+const Wrap = styled(Wrapper)`
 	:hover {
     box-shadow: 0px 2px 12px rgb(0 0 0 / 30%);
 		cursor: pointer;
 	}
-
-	.flex {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
 `;
 
-const Card = () => {
+const Card = (props) => {
+	let voteItem = '';
+	const { data, user } = props;
+	const creator = users.filter(item => item.userId === data.userId);
+	const isClosed = user.name !== creator[0].name;
+
 	const onUpdate = (e) => {
 		e.stopPropagation();
 		console.log('수정');
@@ -34,22 +29,33 @@ const Card = () => {
 		console.log('삭제');
 	};
 
+	const onChangeItem = (e) => {
+		voteItem = e;
+	};
+
 	const onVote = (e) => {
 		e.stopPropagation();
-		console.log('투표하기');
+		console.log('투표하기', voteItem);
 	};
 
 	return (
-		<Wrapper onClick={() => {console.log('상세보기')}}>
-			<Header title={'제목'} onDelete={onDelete} onUpdate={onUpdate}/>
+		<Wrap onClick={() => {console.log('상세보기')}} background={'#fff'}>
+			<Header isClosed={isClosed} title={data.title} onDelete={onDelete} onUpdate={onUpdate}/>
 			<section>
-				<VoteInfo name={'아구몬'} startDate={'20.05.10'} endDate={'20.05.20'}/>
+				<VoteInfo name={creator[0].name} startDate={data.startDate} endDate={data.endDate}/>
 				<div className={'flex'}>
-					<Dropdown width={'100%'} height={'35px'} fontSize={'13px'}/>
+					<Dropdown 
+						options={data.voteItem}
+						defaultValue={'선택해 주세요.'} 
+						width={'100%'} 
+						height={'35px'} 
+						fontSize={'13px'}
+						onChange={onChangeItem}
+					/>
 					<PurpleBtn name={'투표하기'} onClick={onVote} />
 				</div>
 			</section>
-		</Wrapper>
+		</Wrap>
 	)
 };
 
