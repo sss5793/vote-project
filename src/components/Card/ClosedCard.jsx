@@ -1,23 +1,12 @@
-import styled from 'styled-components';
+import Wrapper from './Wrapper';
 import Header from './Header';
 import VoteInfo from './VoteInfo';
 import PurpleBtn from './PurpleBtn';
+import { users } from '../../mocks';
 
-const Wrapper = styled.article`
-	width: 300px;
-	height: 130px;
-	background: #E5E5E5;
-	border-radius: 3px;
-	padding: 15px;
-
-	.flex {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-`;
-
-const ClosedCard = () => {
+const ClosedCard = (props) => {
+	const { data } = props;
+	const creator = users.filter(item => item.userId === data.userId);
 	const isClosed = true;
 
 	const onVote = (e) => {
@@ -26,10 +15,10 @@ const ClosedCard = () => {
 	};
 
 	return (
-		<Wrapper>
-			<Header title={'제목'} isClosed={isClosed}/>
+		<Wrapper background={'#E5E5E5'}>
+			<Header title={data.title} isClosed={isClosed}/>
 			<section>
-				<VoteInfo name={'아구몬'} startDate={'20.05.10'} endDate={'20.05.20'}/>
+				<VoteInfo name={creator[0].name} startDate={data.startDate} endDate={data.endDate}/>
 				<div className={'flex'}>
 					<div></div>
 					<PurpleBtn name={'결과보기'} onClick={onVote} />
