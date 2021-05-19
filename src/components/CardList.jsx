@@ -28,29 +28,29 @@ const MoreList = styled.button`
   font-size: 18px;
 `;
 
-const CardList = ({title, cardList}) => (
-    <section>
-        <Title>{title}</Title>
-        <Wrapper>
-            {
-                cardList.length === 0 ?
-                <NoCard>해당되는 투표가 없습니다.</NoCard> :
-                <div>
-                    {cardList}
-                    {
-                        cardList.length >= 4
-                        && 
-                        <MoreList>더보기</MoreList>
-                    }
-                </div>
-            }
-        </Wrapper>
-    </section>
+const CardList = ({title, cardList, ...props}) => (
+	<section>
+		<Title>{title}</Title>
+		<Wrapper>
+			{
+				cardList.length === 0 ?
+				<NoCard>해당되는 투표가 없습니다.</NoCard> :
+				<div>
+					{props.children}
+					{
+						cardList.length >= 4
+						&& 
+						<MoreList>더보기</MoreList>
+					}
+				</div>
+			}
+		</Wrapper>
+	</section>
 );
 
 CardList.defaultProps = {
-    title: '',
-    cardList: []
+	title: '',
+	cardList: []
 };
 
 export default CardList;
