@@ -1,3 +1,4 @@
+
 import styled from 'styled-components';
 import CommonBtn from './CommonBtn';
 
@@ -24,7 +25,7 @@ const Container = (props) => {
 	<Wrapper>
 		<Header>
 			<UserInfo>	안녕하세요. {user.name}님!</UserInfo>
-			<CommonBtn name={'투표 생성'}/>
+			<CommonBtn name={'투표 생성'} onClick={props.onHeaderBtnClick}/>
 		</Header>
 			<section>
 				{props.children}
