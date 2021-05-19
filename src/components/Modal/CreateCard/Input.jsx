@@ -21,11 +21,11 @@ const TextInput = styled.input`
   font-size: 14px;
 `;
 
-const Input = ({label}) => {
+const Input = ({label, ...props}) => {
   return (
     <Wrapper>
       <label><Label>{label}</Label></label>
-      <TextInput type='text'/>
+      <TextInput type='text' {...props}/>
     </Wrapper>
   )
 };
