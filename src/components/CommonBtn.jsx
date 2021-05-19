@@ -3,18 +3,23 @@ import styled from 'styled-components';
 const Button = styled.button`
   width: 100px;
   height: 35px;
-  background: #780EFF;
+  background: ${props => props.bgColor};
   border-radius: 5px;
-  color: #fff;
+  color: ${props => props.color};
   border: 0;
   font-size: 16px;
   font-weight: 600;
 `;
 
-const CommonBtn = ({name}) => (
-    <Button>
+const CommonBtn = ({name, onClick, bgColor, color}) => (
+    <Button onClick={onClick} bgColor={bgColor} color={color}>
         {name}
     </Button>
 );
+
+CommonBtn.defaultProps = {
+  bgColor: '#780EFF',
+  color: '#fff'
+}
 
 export default CommonBtn;

@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import { Header, Container, CardList, Card, ClosedCard } from './components';
+import { Header, Container, CardList, Card, ClosedCard, CreateCard } from './components';
 import { users, voteList } from './mocks';
 import dayjs from 'dayjs';
 
 function App() {
   const [user, setUser] = useState(users[0]);
   const [endVote, setEndVote] = useState([]);
+  const [isCreate, setIsCreate] = useState(false);
   const [progressVote, setProgressVote] = useState([]);
 
   const onChangeUser = (target) => {
@@ -39,7 +40,7 @@ function App() {
   return (
     <div className="App">
       <Header users={users} name={user.name} onChangeUser={onChangeUser}/>
-      <Container user={user} >
+      <Container user={user} onHeaderBtnClick={() => setIsCreate(true)}>
         <CardList title={'진행중인 투표'} cardList={progressVote}>
           {
             progressVote.map(item => <Card key={item.id} data={item} user={user}/>)
@@ -51,6 +52,9 @@ function App() {
           }
         </CardList>
       </Container>
+      {
+        isCreate && <CreateCard user={user} onClose={() => setIsCreate(false)} />
+      }
     </div>
   );
 }
