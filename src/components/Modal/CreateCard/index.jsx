@@ -1,10 +1,12 @@
+import { useState } from 'react';
+import dayjs from 'dayjs';
 import styled from 'styled-components';
+
 import Input from './Input';
 import DatePicker from './DatePicker';
 import Buttons from './Buttons';
 import VoteItem from './VoteItem'
-import { useState } from 'react';
-import dayjs from 'dayjs';
+import { makeVoteData } from '../../../utils';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -43,7 +45,7 @@ const Form = styled.section`
   padding: 20px;
 `;
 
-const CreateCard = ({user, onClose}) => {
+const CreateCard = ({user, addVote, onClose}) => {
   const [title, setTitle] = useState('');
   const [startDate, setStartDate] = useState(dayjs().format('YYYY-MM-DD'));
   const [endDate, setEndDate] = useState('');
@@ -55,10 +57,15 @@ const CreateCard = ({user, onClose}) => {
   }
 
   const onChangeDate = (e) => {
+    const { value } = e.target;
     if(e.target.name === 'start'){
-      setStartDate(e.target.value);
+      setStartDate(value);
     }else {
-      setEndDate(e.target.value);
+      // 시작일 이전 선택 불가
+      if(dayjs(startDate).isAfter(value)){
+        return;
+      }
+      setEndDate(value);
     }
   }
 
@@ -75,13 +82,21 @@ const CreateCard = ({user, onClose}) => {
   }
 
   const onCreate = () => {
-    if(itemList.length < 3) {
+    if(!title) {
+      // TODO : 팝업 추가
+      console.log('제목 입력');
+      return;
+    }else if(!endDate) {
+      // TODO : 팝업 추가
+      console.log('마감일 입력');
+      return;
+    }else if(itemList.length < 3) {
       // TODO : 팝업 추가
       console.log('항목 부족');
       return;
     }
-    // TODO : 투표 아이템 데이터로 가공
-    console.log(title, user, startDate, endDate, itemList);
+    const data = makeVoteData({title, user, startDate, endDate, itemList});
+    addVote(data);
   };
 
   return (
