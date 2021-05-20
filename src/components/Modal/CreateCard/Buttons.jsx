@@ -1,10 +1,9 @@
 import styled from 'styled-components';
+import BtnWrapper from '../BtnWrapper';
 import CommonBtn from '../../CommonBtn';
 
-const BtnWrapper = styled.section`
-  width: 100%;
+const Wrapper = styled(BtnWrapper)`
   padding: 0 20px 20px 0;
-  text-align: right;
 
   button {
     margin: 0 10px;
@@ -17,10 +16,10 @@ const BtnWrapper = styled.section`
 
 const Buttons = ({onClose, onCreate}) => {
   return (
-    <BtnWrapper>
+    <Wrapper>
       <CommonBtn name={'생성'} onClick={onCreate}/>
       <CommonBtn name={'닫기'} onClick={onClose} bgColor={'#e5e5e5'} color={'#000'}/>
-  </BtnWrapper>
+  </Wrapper>
   )
 }
 
