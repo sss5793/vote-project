@@ -15,7 +15,7 @@ const Wrap = styled(Wrapper)`
 
 const Card = (props) => {
 	let voteItem = '';
-	const { data, user } = props;
+	const { data, user, onDetailCard } = props;
 	const creator = users.filter(item => item.userId === data.userId);
 	const isClosed = user.name !== creator[0].name;
 
@@ -39,7 +39,7 @@ const Card = (props) => {
 	};
 
 	return (
-		<Wrap onClick={() => {console.log('상세보기')}} background={'#fff'}>
+		<Wrap onClick={onDetailCard} background={'#fff'}>
 			<Header isClosed={isClosed} title={data.title} onDelete={onDelete} onUpdate={onUpdate}/>
 			<section>
 				<VoteInfo name={creator[0].name} startDate={data.startDate} endDate={data.endDate}/>
