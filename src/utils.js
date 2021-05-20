@@ -8,6 +8,7 @@ export const makeVoteData = (data) => {
     startDate : data.startDate,
     endDate : data.endDate,
     totalVoteCnt : 0,
+    voterList: [],
     voteItem : makeVoteItem(data.itemList)
   }
 };
@@ -19,7 +20,6 @@ const makeVoteItem = (items) => {
       id: item.id,
       name: item.value,
       count: 0,
-      voterList: [],
     }]
   });
   return arr;
