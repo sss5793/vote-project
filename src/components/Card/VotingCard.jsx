@@ -40,17 +40,21 @@ const Card = (props) => {
 		e.stopPropagation();
 		if(!voteItemId) return console.log('선택해 주세요!')
 
-		// 투표한 사용자의 정보가 있는지 확인
+		// 이미 투표했는지 확인
+		if(data.voterList.indexOf(user.userId) !== -1){
+			return console.log('선택해 주세요!');
+		}
+
 		// 사용자 정보 투표 항목에 넣기
 		const updateData = {
 			...data,
+			voterList: [ ...data.voterList, user.userId],
 			voteItem : data.voteItem.map(item => {
 				if(item.id === parseInt(voteItemId)){
 					return {
 						id: item.id,
 						name: item.name,
 						count: item.count + 1,
-						voterList: [ ...item.voterList, user.userId]
 					}
 				}
 				return item;
@@ -59,7 +63,6 @@ const Card = (props) => {
 		setVoteItemId('');
 		setValue('선택해 주세요.');
 		updateVote(updateData);
-		// 새로고침
 	};
 
 	return (
