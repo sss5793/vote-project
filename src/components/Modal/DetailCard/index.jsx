@@ -29,13 +29,14 @@ const DetailCard = ({data, onClose}) => {
   useEffect(() => {
     let arr = [];
     voteItemList.forEach(item => {
-      const percent = Math.round((parseInt(item.count) / parseInt(totalVoteCnt)) * 1000) / 10;
+      const percent = Math.round((parseInt(item.count) / parseInt(totalVoteCnt)) * 1000) / 10 || 0;
       arr = [...arr, {
         ...item,
         percent
       }]
     })
-    setResult(voteResult(arr));
+    const result = totalVoteCnt && voteResult(arr);
+    setResult(result);
     setVoteItemList(arr);
   }, []);
 
