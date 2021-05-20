@@ -12,8 +12,10 @@ const ItemLabel = styled.span`
 `;
 
 const Item = styled.input`
+  width: 100%;
   font-size: 16px;
   border: 0;
+  pointer-events: none;
 `;
 
 const Input = ({title, value}) => {
