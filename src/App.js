@@ -59,7 +59,7 @@ function App() {
       <Header users={users} name={user.name} onChangeUser={onChangeUser}/>
       <Container user={user} onHeaderBtnClick={() => setIsCreate(true)}>
         <CardList title={'진행중인 투표'} cardList={progressVote} user={user} onDetailCard={onDetailCard} />
-        <CardList title={'종료된 투표'} isEndVote cardList={endVote} user={user}/>
+        <CardList title={'종료된 투표'} isEndVote cardList={endVote} user={user} onDetailCard={onDetailCard} />
       </Container>
       {
         isCreate && <CreateCard user={user} onOpenPopup={onOpenPopup} addVote={addVote} onClose={() => setIsCreate(false)} />
