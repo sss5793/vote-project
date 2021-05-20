@@ -45,7 +45,7 @@ const Form = styled.section`
   padding: 20px;
 `;
 
-const CreateCard = ({user, addVote, onClose}) => {
+const CreateCard = ({user, addVote, onClose, onOpenPopup}) => {
   const [title, setTitle] = useState('');
   const [startDate, setStartDate] = useState(dayjs().format('YYYY-MM-DD'));
   const [endDate, setEndDate] = useState('');
@@ -84,15 +84,15 @@ const CreateCard = ({user, addVote, onClose}) => {
   const onCreate = () => {
     if(!title) {
       // TODO : 팝업 추가
-      console.log('제목 입력');
+      onOpenPopup('제목을 입력해주세요.');
       return;
     }else if(!endDate) {
       // TODO : 팝업 추가
-      console.log('마감일 입력');
+      onOpenPopup('마감일을 선택해주세요.');
       return;
     }else if(itemList.length < 3) {
       // TODO : 팝업 추가
-      console.log('항목 부족');
+      onOpenPopup('투표 항목을 3개 이상 입력해주세요.');
       return;
     }
     const data = makeVoteData({title, user, startDate, endDate, itemList});
