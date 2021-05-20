@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import Title from './Title';
 import Wrapper from './Wrapper';
 import MoreBtn from './MoreBtn';
 import NoCard from './NoCard';
+
+import Card from '../Card/VotingCard';
+import ClosedCard from '../Card/ClosedCard';
 
 const CardContainer = styled.section`
 	width: 100%;
@@ -16,8 +20,15 @@ const CardContainer = styled.section`
 	}
 `;
 
-const CardList = ({title, cardList, ...props}) => {
-	// 더보기 보이도록 계산
+const CardList = (props) => {
+  const [ viewCardCnt, setViewCardCnt ] = useState(2);
+  const { title, cardList, user, onDetailCard, isEndVote } = props;
+  
+  // 더보기 보이도록 계산
+  const onMoreCard = () => {
+    setViewCardCnt(state => state + 3);
+  };
+
 	return (
 	<section>
 		<Title>{title}</Title>
@@ -27,12 +38,17 @@ const CardList = ({title, cardList, ...props}) => {
 				<NoCard />:
 				<CardContainer>
 					<div>
-						{props.children}
+            {
+              !isEndVote ?
+              cardList.map((item, index) => index <= viewCardCnt && <Card key={item.id} data={item} user={user} onDetailCard={onDetailCard}/>)
+              :
+              cardList.map(item => <ClosedCard key={item.id} data={item} user={user} onDetailCard={onDetailCard}/>)
+            }
 					</div>
 					{
-						cardList.length >= 4
+						cardList.length >= 4 && viewCardCnt < (cardList.length - 1)
 						&&
-						<MoreBtn />
+						<MoreBtn onClick={onMoreCard}/>
 					}
 				</CardContainer>
 			}
@@ -42,7 +58,8 @@ const CardList = ({title, cardList, ...props}) => {
 
 CardList.defaultProps = {
 	title: '',
-	cardList: []
+  cardList: [],
+  isEndVote: false
 };
 
 export default CardList;
