@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import { Header, Container, CardList, Card, ClosedCard, CreateCard } from './components';
 import { users, voteList } from './mocks';
-import dayjs from 'dayjs';
+import { makeVoteId, formatVoteList } from './utils';
 
 function App() {
   const [user, setUser] = useState(users[0]);
-  const [endVote, setEndVote] = useState([]);
   const [isCreate, setIsCreate] = useState(false);
+  const [voteData, setVoteData] = useState([]);
+  const [endVote, setEndVote] = useState([]);
   const [progressVote, setProgressVote] = useState([]);
 
   const onChangeUser = (target) => {
@@ -15,25 +16,27 @@ function App() {
 		setUser(item[0]);
   };
 
-  // 카드 분류(진행중, 종료)
-  const formatVoteList = (list) => {
-    list.forEach(element => {
-      const res = dayjs().isBefore(element.endDate);
-      if(res){
-        setProgressVote(state => [...state, element]);
-      }else{
-        setEndVote(state => [...state, element]);
-      }
-    });
+  const addVote = (data) => {
+    const id = makeVoteId(voteData);
+    const newVoteData = { id, ...data};
+    sortVoteList([...voteData, newVoteData]);
+    setIsCreate(false);
+  };
+
+  const sortVoteList = (list) => {
+    setVoteData(list);
+    localStorage.setItem('@voteData',JSON.stringify(list));
+    const {newProgressVote, newEndVote} = formatVoteList(list);
+    setEndVote(newEndVote);
+    setProgressVote(newProgressVote)
   };
 
   useEffect(() => {
     const mockData = localStorage.getItem('@voteData');
     if(!mockData){
-      localStorage.setItem('@voteData',JSON.stringify(voteList));
-      formatVoteList(JSON.parse(voteList));
+      sortVoteList(voteList);
     }else {
-      formatVoteList(JSON.parse(mockData));
+      sortVoteList(JSON.parse(mockData));
     }
   }, []);
 
@@ -53,7 +56,7 @@ function App() {
         </CardList>
       </Container>
       {
-        isCreate && <CreateCard user={user} onClose={() => setIsCreate(false)} />
+        isCreate && <CreateCard user={user} addVote={addVote} onClose={() => setIsCreate(false)} />
       }
     </div>
   );
