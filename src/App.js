@@ -26,7 +26,7 @@ function App() {
   };
 
   const onChangeUser = (target) => {
-		const item = users.filter(item => item.name === target);
+		const item = users.filter(item => item.name === target.innerText);
 		setUser(item[0]);
   };
 
