@@ -51,14 +51,17 @@ export const voteList = [
         voterList : [1,2,3,4,5,6,7],
         voteItem : [
             {
+                id: 0,
                 name: '짜장면',
                 count: 2,
             },
             {
+                id: 1,
                 name: '짬뽕',
                 count: 1,
             },
             {
+                id: 2,
                 name: '볶음밥',
                 count: 4,
             }
@@ -74,14 +77,17 @@ export const voteList = [
         voterList : [1,2,3,4,5,6,7],
         voteItem : [
             {
+                id: 0,
                 name: '영화 보기',
                 count: 2
             },
             {
+                id: 1,
                 name: '책 읽기',
                 count: 1
             },
             {
+                id: 2,
                 name: '청소하기',
                 count: 4
             }
