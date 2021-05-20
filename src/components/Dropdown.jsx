@@ -67,7 +67,7 @@ const ItemBtn = styled.button`
 
 const Item = ({id, name, onSelect, fontSize, height}) => (
 	<li>
-		<ItemBtn fontSize={fontSize} height={height} onClick={onSelect}>{name}</ItemBtn>
+		<ItemBtn id={id} fontSize={fontSize} height={height} onClick={onSelect}>{name}</ItemBtn>
 	</li>
 );
 
@@ -81,7 +81,7 @@ const Dropdown = ({options, defaultValue, onChange, width, height, fontSize}) =>
 
 	const onSelect = (e) => {
 		e.stopPropagation();
-		onChange(e.target.innerText);
+		onChange(e.target);
 		setValue(e.target.innerText);
 		setIsActive(!isActive);
 	}
@@ -96,7 +96,7 @@ const Dropdown = ({options, defaultValue, onChange, width, height, fontSize}) =>
 		</Button>
 		<Options className={isActive ? 'active' : 'inactive'} height={height}>
 			{
-				options.map(item => <Item key={item.id + item.name} height={height} fontSize={fontSize} name={item.name} onSelect={onSelect}/>)
+				options.map(item => <Item key={item.id + item.name} height={height} fontSize={fontSize} id={item.id} name={item.name} onSelect={onSelect}/>)
 			}
 		</Options>
 	</Wrapper>
