@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import { Header, Container, CardList, Card, ClosedCard, CreateCard, Popup, DetailCard } from './components';
+import { Header, Container, CardList, CreateCard, Popup, DetailCard } from './components';
 import { users, voteList } from './mocks';
 import { makeVoteId, formatVoteList, findVoteInfo } from './utils';
 
@@ -58,16 +58,8 @@ function App() {
     <div className="App">
       <Header users={users} name={user.name} onChangeUser={onChangeUser}/>
       <Container user={user} onHeaderBtnClick={() => setIsCreate(true)}>
-        <CardList title={'진행중인 투표'} cardList={progressVote}>
-          {
-            progressVote.map(item => <Card onDetailCard={onDetailCard} key={item.id} data={item} user={user}/>)
-          }
-        </CardList>
-        <CardList title={'종료된 투표'} cardList={endVote}>
-          {
-            endVote.map(item => <ClosedCard key={item.id} data={item} user={user}/>)
-          }
-        </CardList>
+        <CardList title={'진행중인 투표'} cardList={progressVote} user={user} onDetailCard={onDetailCard} />
+        <CardList title={'종료된 투표'} isEndVote cardList={endVote} user={user}/>
       </Container>
       {
         isCreate && <CreateCard user={user} onOpenPopup={onOpenPopup} addVote={addVote} onClose={() => setIsCreate(false)} />

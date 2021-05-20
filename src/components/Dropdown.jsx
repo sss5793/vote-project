@@ -40,14 +40,21 @@ const Options = styled.ul`
 	border: 1px solid #e5e5e5;
 	width:100%;
 	background: #fff;
-  transition: opacity 0.4s ease, visibility 0.4s;
+	transition: opacity 0.4s ease, visibility 0.4s;
+	
+	li {
+		border-bottom: 1px solid #dddddd;
+
+		:last-child {
+			border: 0;
+		}
+	}
 `;
 
 const ItemBtn = styled.button`
 	width: 100%;
   height: ${props => props.height};
 	border: 0;
-	border-bottom: 1px solid #dddddd;
 	padding: 10px;
 	background: transparent;
 	text-align: left;
