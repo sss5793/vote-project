@@ -2,6 +2,7 @@ import Header from './Header';
 import Container from './Container';
 import CardList from './CardList';
 import CreateCard from './Modal/CreateCard';
+import DetailCard from './Modal/DetailCard';
 import Card from './Card/VotingCard';
 import ClosedCard from './Card/ClosedCard';
 import Popup from './Popup';
@@ -13,5 +14,6 @@ export {
     Card,
     ClosedCard,
     CreateCard,
-    Popup
+    DetailCard,
+    Popup,
 };

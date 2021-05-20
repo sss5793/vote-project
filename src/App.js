@@ -1,17 +1,24 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import { Header, Container, CardList, Card, ClosedCard, CreateCard, Popup } from './components';
+import { Header, Container, CardList, Card, ClosedCard, CreateCard, Popup, DetailCard } from './components';
 import { users, voteList } from './mocks';
-import { makeVoteId, formatVoteList } from './utils';
+import { makeVoteId, formatVoteList, findVoteInfo } from './utils';
 
 function App() {
   const [user, setUser] = useState(users[0]);
   const [isCreate, setIsCreate] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
+  const [isDetail, setIsDetail] = useState(false);
+  const [voteInfo, setVoteInfo] = useState({});
   const [popupText, setPopupText] = useState(false);
   const [voteData, setVoteData] = useState([]);
   const [endVote, setEndVote] = useState([]);
   const [progressVote, setProgressVote] = useState([]);
+
+  const onDetailCard = (id) => {
+    setVoteInfo(findVoteInfo(id, voteData));
+    setIsDetail(state => !state);
+  }
 
   const onOpenPopup = (text) => {
     setPopupText(text);
@@ -53,7 +60,7 @@ function App() {
       <Container user={user} onHeaderBtnClick={() => setIsCreate(true)}>
         <CardList title={'진행중인 투표'} cardList={progressVote}>
           {
-            progressVote.map(item => <Card key={item.id} data={item} user={user}/>)
+            progressVote.map(item => <Card onDetailCard={onDetailCard} key={item.id} data={item} user={user}/>)
           }
         </CardList>
         <CardList title={'종료된 투표'} cardList={endVote}>
@@ -67,6 +74,9 @@ function App() {
       }
       {
         isPopup && <Popup isConfirm text={popupText} onClose={onOpenPopup} />
+      }
+      {
+        isDetail && <DetailCard data={voteInfo} onClose={onDetailCard}/>
       }
     </div>
   );

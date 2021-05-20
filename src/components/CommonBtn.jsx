@@ -12,7 +12,7 @@ const Button = styled.button`
 `;
 
 const CommonBtn = ({name, onClick, bgColor, color}) => (
-    <Button onClick={onClick} bgColor={bgColor} color={color}>
+    <Button type={'button'} onClick={onClick} bgColor={bgColor} color={color}>
         {name}
     </Button>
 );
