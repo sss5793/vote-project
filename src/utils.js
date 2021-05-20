@@ -8,6 +8,7 @@ export const makeVoteData = (data) => {
     startDate : data.startDate,
     endDate : data.endDate,
     totalVoteCnt : 0,
+    voterList: [],
     voteItem : makeVoteItem(data.itemList)
   }
 };
@@ -19,7 +20,6 @@ const makeVoteItem = (items) => {
       id: item.id,
       name: item.value,
       count: 0,
-      voterList: [],
     }]
   });
   return arr;
@@ -66,4 +66,14 @@ export const formatDate = (date) => {
 // 투표 결과 추출하기
 export const voteResult = (list) => {
   return list.reduce((a,b) => a.percent > b.percent ? a : b);
+}
+
+// 투표 목록 업데이트
+export const updateVoteList = (data, list) => {
+  return list.map(item => {
+    if(item.id === data.id){
+      return data
+    }
+    return item
+  })
 }

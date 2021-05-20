@@ -21,7 +21,7 @@ const Title = styled.h1`
  const Header = ({users, name, onChangeUser}) => (
   <HeaderLayout>
     <Title>Voting Page</Title>
-    <Dropdown options={users} defaultValue={name} onChange={onChangeUser}/>
+    <Dropdown options={users} value={name} onChange={onChangeUser}/>
   </HeaderLayout>
 );
 

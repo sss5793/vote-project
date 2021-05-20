@@ -48,21 +48,22 @@ export const voteList = [
         startDate : new Date('2021-05-03'),
         endDate : new Date('2021-05-03'),
         totalVoteCnt : 7,
+        voterList : [1,2,3,4,5,6,7],
         voteItem : [
             {
+                id: 0,
                 name: '짜장면',
                 count: 2,
-                voterList : [1, 2]
             },
             {
+                id: 1,
                 name: '짬뽕',
                 count: 1,
-                voterList : [3]
             },
             {
+                id: 2,
                 name: '볶음밥',
                 count: 4,
-                voterList : [4,5,6,7]
             }
         ]
     },
@@ -73,21 +74,22 @@ export const voteList = [
         startDate : new Date('2021-05-15'),
         endDate : new Date('2021-05-25'),
         totalVoteCnt : 7,
+        voterList : [1,2,3,4,5,6,7],
         voteItem : [
             {
+                id: 0,
                 name: '영화 보기',
-                count: 2,
-                voterList : [1, 2]
+                count: 2
             },
             {
+                id: 1,
                 name: '책 읽기',
-                count: 1,
-                voterList : [3]
+                count: 1
             },
             {
+                id: 2,
                 name: '청소하기',
-                count: 4,
-                voterList : [4,5,6,7]
+                count: 4
             }
         ]
     }

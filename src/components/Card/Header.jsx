@@ -8,6 +8,10 @@ const Title = styled.h2`
 	font-size: 18px;
 `;
 
+const BtnWrapper = styled.div`
+	visibility: ${props => props.visibility};
+`;
+
 const SmallBtn = styled.button`
 	background: transparent;
 	border: 0;
@@ -20,13 +24,10 @@ const Header = ({title, onUpdate, onDelete, isClosed}) => {
 	return (
 	<Wrapper className={'flex'}>
 		<Title>{title}</Title>
-		{
-			!isClosed &&
-			<div>
-				<SmallBtn onClick={onUpdate}>수정</SmallBtn>
-				<SmallBtn onClick={onDelete}>삭제</SmallBtn>
-			</div>
-		}
+		<BtnWrapper visibility={isClosed ? 'hidden' : 'visible'}>
+			<SmallBtn onClick={onUpdate}>수정</SmallBtn>
+			<SmallBtn onClick={onDelete}>삭제</SmallBtn>
+		</BtnWrapper>
 	</Wrapper>
 	)
 };

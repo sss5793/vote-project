@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useToasts } from 'react-toast-notifications';
 import styled from 'styled-components';
 import Wrapper from './Wrapper';
 import Dropdown from '../Dropdown';
@@ -14,8 +16,10 @@ const Wrap = styled(Wrapper)`
 `;
 
 const Card = (props) => {
-	let voteItem = '';
-	const { data, user, onDetailCard } = props;
+	const { addToast } = useToasts();
+	const [value, setValue] = useState('선택해 주세요.');
+	const [voteItemId, setVoteItemId] = useState('');
+	const { data, user, onDetailCard, updateVote } = props;
 	const creator = users.filter(item => item.userId === data.userId);
 	const isClosed = user.name !== creator[0].name;
 
@@ -29,13 +33,47 @@ const Card = (props) => {
 		console.log('삭제');
 	};
 
-	const onChangeItem = (e) => {
-		voteItem = e;
+	const onChangeItem = (target) => {
+		setVoteItemId(target.id);
+		setValue(target.innerText);
 	};
 
 	const onVote = (e) => {
 		e.stopPropagation();
-		console.log('투표하기', voteItem);
+		if(!voteItemId) return addToast('투표 항목을 선택해주세요.', {
+			appearance: 'error',
+			autoDismiss: true,
+		});
+
+		// 이미 투표했는지 확인
+		if(data.voterList.indexOf(user.userId) !== -1) return addToast('이미 진행하신 투표입니다.', {
+				appearance: 'error',
+				autoDismiss: true,
+			});
+		
+
+		// 사용자 정보 투표 항목에 넣기
+		const updateData = {
+			...data,
+			voterList: [ ...data.voterList, user.userId],
+			voteItem : data.voteItem.map(item => {
+				if(item.id === parseInt(voteItemId)){
+					return {
+						id: item.id,
+						name: item.name,
+						count: item.count + 1,
+					}
+				}
+				return item;
+			})
+		}
+		setVoteItemId('');
+		setValue('선택해 주세요.');
+		updateVote(updateData);
+		addToast('투표가 정상적으로 되었습니다.', {
+			appearance: 'success',
+			autoDismiss: true,
+		});
 	};
 
 	return (
@@ -44,15 +82,15 @@ const Card = (props) => {
 			<section>
 				<VoteInfo name={creator[0].name} startDate={data.startDate} endDate={data.endDate}/>
 				<div className={'flex'}>
-					<Dropdown 
+					<Dropdown
+						value={value}
 						options={data.voteItem}
-						defaultValue={'선택해 주세요.'} 
 						width={'100%'} 
 						height={'35px'} 
 						fontSize={'13px'}
 						onChange={onChangeItem}
 					/>
-					<PurpleBtn name={'투표하기'} onClick={onVote} />
+					<PurpleBtn name={'투표하기'} isDisable={!isClosed} onClick={onVote} />
 				</div>
 			</section>
 		</Wrap>
