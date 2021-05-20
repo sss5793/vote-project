@@ -2,19 +2,21 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import { Header, Container, CardList, Card, ClosedCard, CreateCard, Popup, DetailCard } from './components';
 import { users, voteList } from './mocks';
-import { makeVoteId, formatVoteList } from './utils';
+import { makeVoteId, formatVoteList, findVoteInfo } from './utils';
 
 function App() {
   const [user, setUser] = useState(users[0]);
   const [isCreate, setIsCreate] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
   const [isDetail, setIsDetail] = useState(false);
+  const [voteInfo, setVoteInfo] = useState({});
   const [popupText, setPopupText] = useState(false);
   const [voteData, setVoteData] = useState([]);
   const [endVote, setEndVote] = useState([]);
   const [progressVote, setProgressVote] = useState([]);
 
-  const onDetailCard = () => {
+  const onDetailCard = (id) => {
+    setVoteInfo(findVoteInfo(id, voteData));
     setIsDetail(state => !state);
   }
 
@@ -74,7 +76,7 @@ function App() {
         isPopup && <Popup isConfirm text={popupText} onClose={onOpenPopup} />
       }
       {
-        isDetail && <DetailCard onClose={onDetailCard}/>
+        isDetail && <DetailCard data={voteInfo} onClose={onDetailCard}/>
       }
     </div>
   );

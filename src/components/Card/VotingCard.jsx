@@ -39,7 +39,7 @@ const Card = (props) => {
 	};
 
 	return (
-		<Wrap onClick={onDetailCard} background={'#fff'}>
+		<Wrap onClick={() => onDetailCard(data.id)} background={'#fff'}>
 			<Header isClosed={isClosed} title={data.title} onDelete={onDelete} onUpdate={onUpdate}/>
 			<section>
 				<VoteInfo name={creator[0].name} startDate={data.startDate} endDate={data.endDate}/>
