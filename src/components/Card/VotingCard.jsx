@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import Wrapper from './Wrapper';
 import Dropdown from '../Dropdown';
@@ -14,8 +15,9 @@ const Wrap = styled(Wrapper)`
 `;
 
 const Card = (props) => {
-	let voteItemId = '';
-	const { data, user, onDetailCard } = props;
+	const [value, setValue] = useState('선택해 주세요.');
+	const [voteItemId, setVoteItemId] = useState('');
+	const { data, user, onDetailCard, updateVote } = props;
 	const creator = users.filter(item => item.userId === data.userId);
 	const isClosed = user.name !== creator[0].name;
 
@@ -30,15 +32,34 @@ const Card = (props) => {
 	};
 
 	const onChangeItem = (target) => {
-		voteItemId = target.id;
+		setVoteItemId(target.id);
+		setValue(target.innerText);
 	};
 
 	const onVote = (e) => {
 		e.stopPropagation();
 		if(!voteItemId) return console.log('선택해 주세요!')
-		// 투표는 한번만 가능? 수정 하게?
+
+		// 투표한 사용자의 정보가 있는지 확인
 		// 사용자 정보 투표 항목에 넣기
-		console.log('투표하기', voteItemId);
+		const updateData = {
+			...data,
+			voteItem : data.voteItem.map(item => {
+				if(item.id === parseInt(voteItemId)){
+					return {
+						id: item.id,
+						name: item.name,
+						count: item.count + 1,
+						voterList: [ ...item.voterList, user.userId]
+					}
+				}
+				return item;
+			})
+		}
+		setVoteItemId('');
+		setValue('선택해 주세요.');
+		updateVote(updateData);
+		// 새로고침
 	};
 
 	return (
@@ -47,9 +68,9 @@ const Card = (props) => {
 			<section>
 				<VoteInfo name={creator[0].name} startDate={data.startDate} endDate={data.endDate}/>
 				<div className={'flex'}>
-					<Dropdown 
+					<Dropdown
+						value={value}
 						options={data.voteItem}
-						defaultValue={'선택해 주세요.'} 
 						width={'100%'} 
 						height={'35px'} 
 						fontSize={'13px'}

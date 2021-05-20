@@ -22,7 +22,7 @@ const CardContainer = styled.section`
 
 const CardList = (props) => {
   const [ viewCardCnt, setViewCardCnt ] = useState(2);
-  const { title, cardList, user, onDetailCard, isEndVote } = props;
+  const { title, cardList, user, onDetailCard, isEndVote, updateVote } = props;
   
   // 더보기 보이도록 계산
   const onMoreCard = () => {
@@ -40,7 +40,7 @@ const CardList = (props) => {
 					<div>
             {
               !isEndVote ?
-              cardList.map((item, index) => index <= viewCardCnt && <Card key={item.id} data={item} user={user} onDetailCard={onDetailCard}/>)
+              cardList.map((item, index) => index <= viewCardCnt && <Card key={item.id} data={item} user={user} updateVote={updateVote} onDetailCard={onDetailCard}/>)
               :
               cardList.map(item => <ClosedCard key={item.id} data={item} user={user} onDetailCard={onDetailCard}/>)
             }

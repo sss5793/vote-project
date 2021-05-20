@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import { Header, Container, CardList, CreateCard, Popup, DetailCard } from './components';
 import { users, voteList } from './mocks';
-import { makeVoteId, formatVoteList, findVoteInfo } from './utils';
+import { makeVoteId, formatVoteList, findVoteInfo, updateVoteList } from './utils';
 
 function App() {
   const [user, setUser] = useState(users[0]);
@@ -37,6 +37,10 @@ function App() {
     setIsCreate(false);
   };
 
+  const updateVote = (data) => {
+    sortVoteList(updateVoteList(data, voteData));
+  };
+
   const sortVoteList = (list) => {
     setVoteData(list);
     localStorage.setItem('@voteData',JSON.stringify(list));
@@ -58,7 +62,7 @@ function App() {
     <div className="App">
       <Header users={users} name={user.name} onChangeUser={onChangeUser}/>
       <Container user={user} onHeaderBtnClick={() => setIsCreate(true)}>
-        <CardList title={'진행중인 투표'} cardList={progressVote} user={user} onDetailCard={onDetailCard} />
+        <CardList title={'진행중인 투표'} cardList={progressVote} user={user} updateVote={updateVote} onDetailCard={onDetailCard} />
         <CardList title={'종료된 투표'} isEndVote cardList={endVote} user={user} onDetailCard={onDetailCard} />
       </Container>
       {
