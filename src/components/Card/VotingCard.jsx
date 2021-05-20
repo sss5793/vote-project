@@ -52,7 +52,7 @@ const Card = (props) => {
 						fontSize={'13px'}
 						onChange={onChangeItem}
 					/>
-					<PurpleBtn name={'투표하기'} onClick={onVote} />
+					<PurpleBtn name={'투표하기'} isDisable={!isClosed} onClick={onVote} />
 				</div>
 			</section>
 		</Wrap>

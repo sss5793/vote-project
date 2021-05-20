@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const PurpleBtn = styled.button`
+const Btn = styled.button`
 	width: 70px;
 	height: 35px;
 	background: #780EFF;
@@ -10,12 +10,17 @@ const PurpleBtn = styled.button`
 	font-weight: 600;
 	margin-left: 17px;
 	flex-shrink: 0;
+
+	:disabled {
+		background: #E5E5E5;
+		cursor: auto;
+	}
 `;
 
-const Card = ({onClick, name}) => {
+const PurpleBtn = ({onClick, name, isDisable}) => {
 	return (
-		<PurpleBtn onClick={onClick}>{name}</PurpleBtn>
+		<Btn onClick={onClick} disabled={isDisable}>{name}</Btn>
 	)
 };
 
-export default Card;
+export default PurpleBtn;
