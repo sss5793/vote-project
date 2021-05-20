@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useToasts } from 'react-toast-notifications';
 import styled from 'styled-components';
 import Wrapper from './Wrapper';
 import Dropdown from '../Dropdown';
@@ -15,6 +16,7 @@ const Wrap = styled(Wrapper)`
 `;
 
 const Card = (props) => {
+	const { addToast } = useToasts();
 	const [value, setValue] = useState('선택해 주세요.');
 	const [voteItemId, setVoteItemId] = useState('');
 	const { data, user, onDetailCard, updateVote } = props;
@@ -38,12 +40,17 @@ const Card = (props) => {
 
 	const onVote = (e) => {
 		e.stopPropagation();
-		if(!voteItemId) return console.log('선택해 주세요!')
+		if(!voteItemId) return addToast('투표 항목을 선택해주세요.', {
+			appearance: 'error',
+			autoDismiss: true,
+		});
 
 		// 이미 투표했는지 확인
-		if(data.voterList.indexOf(user.userId) !== -1){
-			return console.log('선택해 주세요!');
-		}
+		if(data.voterList.indexOf(user.userId) !== -1) return addToast('이미 진행하신 투표입니다.', {
+				appearance: 'error',
+				autoDismiss: true,
+			});
+		
 
 		// 사용자 정보 투표 항목에 넣기
 		const updateData = {
@@ -63,6 +70,10 @@ const Card = (props) => {
 		setVoteItemId('');
 		setValue('선택해 주세요.');
 		updateVote(updateData);
+		addToast('투표가 정상적으로 되었습니다.', {
+			appearance: 'success',
+			autoDismiss: true,
+		});
 	};
 
 	return (
