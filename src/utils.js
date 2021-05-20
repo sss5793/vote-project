@@ -43,6 +43,8 @@ export const formatVoteList = (list) => {
       newEndVote = [...newEndVote, element];
     }
   });
+  newProgressVote.reverse();
+  newEndVote.reverse();
   return { newProgressVote, newEndVote}
 };
 
