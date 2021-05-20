@@ -55,10 +55,15 @@ const CreateCard = ({user, onClose}) => {
   }
 
   const onChangeDate = (e) => {
+    const { value } = e.target;
     if(e.target.name === 'start'){
-      setStartDate(e.target.value);
+      setStartDate(value);
     }else {
-      setEndDate(e.target.value);
+      // 시작일 이전 선택 불가
+      if(dayjs(startDate).isAfter(value)){
+        return;
+      }
+      setEndDate(value);
     }
   }
 
