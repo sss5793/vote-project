@@ -8,11 +8,6 @@ const ClosedCard = (props) => {
 	const { data, onDetailCard } = props;
 	const creator = users.filter(item => item.userId === data.userId);
 
-	const onVote = (e) => {
-		e.stopPropagation();
-		console.log('결과보기');
-	};
-
 	return (
 		<Wrapper background={'#E5E5E5'}>
 			<Header title={data.title} isClosed/>
