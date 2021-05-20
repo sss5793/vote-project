@@ -14,7 +14,7 @@ const Wrap = styled(Wrapper)`
 `;
 
 const Card = (props) => {
-	let voteItem = '';
+	let voteItemId = '';
 	const { data, user, onDetailCard } = props;
 	const creator = users.filter(item => item.userId === data.userId);
 	const isClosed = user.name !== creator[0].name;
@@ -29,13 +29,16 @@ const Card = (props) => {
 		console.log('삭제');
 	};
 
-	const onChangeItem = (e) => {
-		voteItem = e;
+	const onChangeItem = (target) => {
+		voteItemId = target.id;
 	};
 
 	const onVote = (e) => {
 		e.stopPropagation();
-		console.log('투표하기', voteItem);
+		if(!voteItemId) return console.log('선택해 주세요!')
+		// 투표는 한번만 가능? 수정 하게?
+		// 사용자 정보 투표 항목에 넣기
+		console.log('투표하기', voteItemId);
 	};
 
 	return (
