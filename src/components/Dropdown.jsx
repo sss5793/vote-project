@@ -71,9 +71,9 @@ const Item = ({id, name, onSelect, fontSize, height}) => (
 	</li>
 );
 
-const Dropdown = ({options, defaultValue, onChange, width, height, fontSize}) => {
-	const [value, setValue] = useState(defaultValue);
-  const [isActive, setIsActive] = useState(false);
+const Dropdown = ({value, options, onChange, width, height, fontSize}) => {
+	const [isActive, setIsActive] = useState(false);
+	
   const onClick = (e) => {
 		e.stopPropagation();
 		setIsActive(!isActive);
@@ -82,7 +82,6 @@ const Dropdown = ({options, defaultValue, onChange, width, height, fontSize}) =>
 	const onSelect = (e) => {
 		e.stopPropagation();
 		onChange(e.target);
-		setValue(e.target.innerText);
 		setIsActive(!isActive);
 	}
 
@@ -104,7 +103,7 @@ const Dropdown = ({options, defaultValue, onChange, width, height, fontSize}) =>
 
 Dropdown.defaultProps = {
 	options : [{id: 0, name: '항목 1'}],
-	defaultValue : '기본',
+	value : '선택해 주세요.',
 	onChange: () => {},
 	width: '150px',
 	height: '40px',
