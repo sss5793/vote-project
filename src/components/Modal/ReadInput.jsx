@@ -9,6 +9,7 @@ const ItemContainer = styled.div`
 const ItemLabel = styled.span`
   width: 100px;
   font-size: 16px;
+  flex-shrink: 0;
 `;
 
 const Item = styled.input`
@@ -18,7 +19,7 @@ const Item = styled.input`
   pointer-events: none;
 `;
 
-const Input = ({title, value}) => {
+const ReadInput = ({title, value}) => {
   return (
     <ItemContainer>
       <ItemLabel>{title}</ItemLabel>
@@ -27,4 +28,4 @@ const Input = ({title, value}) => {
   );
 };
 
-export default Input;
+export default ReadInput;
