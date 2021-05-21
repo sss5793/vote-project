@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import dayjs from 'dayjs';
+import { useToasts } from 'react-toast-notifications';
 
 import Wrapper from '../Wrapper';
 import Title from '../Title';
@@ -17,6 +18,7 @@ const CreateCard = ({user, addVote, onClose, onOpenPopup}) => {
   const [endDate, setEndDate] = useState('');
   const [itemId, setItemId] = useState(0);
   const [itemList, setItemList] = useState([]);
+	const { addToast } = useToasts();
 
   const onChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -49,16 +51,22 @@ const CreateCard = ({user, addVote, onClose, onOpenPopup}) => {
 
   const onCreate = () => {
     if(!title) {
-      // TODO : 팝업 추가
-      onOpenPopup('제목을 입력해주세요.');
+      addToast('제목을 입력해주세요.', {
+        appearance: 'error',
+        autoDismiss: true,
+      });
       return;
     }else if(!endDate) {
-      // TODO : 팝업 추가
-      onOpenPopup('마감일을 선택해주세요.');
+      addToast('마감일을 선택해주세요.', {
+        appearance: 'error',
+        autoDismiss: true,
+      });
       return;
     }else if(itemList.length < 3) {
-      // TODO : 팝업 추가
-      onOpenPopup('투표 항목을 3개 이상 입력해주세요.');
+      addToast('투표 항목을 3개 이상 입력해주세요.', {
+        appearance: 'error',
+        autoDismiss: true,
+      });
       return;
     }
     const data = makeVoteData({title, user, startDate, endDate, itemList});
