@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  width: 30%;
+  width: 40%;
   height: 20%;
   background: #fff;
   display: flex;
@@ -36,21 +36,14 @@ const BtnWrapper = styled.div`
   justify-content: space-evenly;
 `;
 
-const Popup = ({text, btnName, onClose, onConfirm, isConfirm}) => {
+const Popup = ({text, btnName, onClose, onConfirm}) => {
   return(
     <Wrapper>
       <Container>
         <Text>{text}</Text>
         <BtnWrapper>
-          {
-            isConfirm ?
-            <CommonBtn name={btnName} onClick={onClose}/>
-            :
-            <>
-              <CommonBtn name={btnName} onClick={onConfirm}/>
-              <CommonBtn name={'닫기'} bgColor={'#e5e5e5'} color={'#000'} onClick={onClose}/>
-            </>
-          }
+          <CommonBtn name={btnName} onClick={onConfirm}/>
+          <CommonBtn name={'닫기'} bgColor={'#e5e5e5'} color={'#000'} onClick={onClose}/>
         </BtnWrapper>
       </Container>
     </Wrapper>
