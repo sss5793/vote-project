@@ -12,7 +12,7 @@ import Buttons from '../Buttons';
 import VoteItem from './VoteItem'
 import { makeVoteData } from '../../../utils';
 
-const CreateCard = ({user, addVote, onClose, onOpenPopup}) => {
+const CreateCard = ({user, addVote, onClose}) => {
   const [title, setTitle] = useState('');
   const [startDate, setStartDate] = useState(dayjs().format('YYYY-MM-DD'));
   const [endDate, setEndDate] = useState('');

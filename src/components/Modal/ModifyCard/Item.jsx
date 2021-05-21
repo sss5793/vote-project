@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { ReactComponent as Delete} from '../../../assets/images/delete.svg';
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,13 +16,10 @@ const ItemInput = styled.input`
   border: 1px solid #E5E5E5;
 `;
 
-const Item = ({value, onChange}) => {
+const Item = ({value, id, onChange}) => {
   return (
     <Wrapper>
-      <ItemInput />
-      <button>
-        <Delete />
-      </button>
+      <ItemInput value={value} id={id} onChange={onChange}/>
     </Wrapper>
   )
 }
