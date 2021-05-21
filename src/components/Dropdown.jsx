@@ -88,7 +88,7 @@ const Dropdown = ({value, options, onChange, width, height, fontSize}) => {
 	return(
 	<Wrapper width={width} height={height} fontSize={fontSize}>
 		<Button onClick={onClick} height={height} fontSize={fontSize}>
-			<span>{value}</span>
+			{value}
 			{
 				isActive ? <ArrowUp /> : <ArrowDown />
 			}
