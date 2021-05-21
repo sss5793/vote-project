@@ -18,22 +18,6 @@ function App() {
   const [endVote, setEndVote] = useState([]);
   const [progressVote, setProgressVote] = useState([]);
 
-  const onDetailCard = (id) => {
-    setVoteInfo(findVoteInfo(id, voteData));
-    setIsDetail(state => !state);
-  }
-
-  const onModifyCard = (id) => {
-    setVoteInfo(findVoteInfo(id, voteData));
-    setIsModify(state => !state);
-  }
-
-  const onOpenPopup = (text,id) => {
-    setPopupText(text);
-    setSelectItemId(id);
-		setIsPopup(state => !state);
-  };
-
   const onChangeUser = (target) => {
 		const item = users.filter(item => item.name === target.innerText);
 		setUser(item[0]);
@@ -46,6 +30,22 @@ function App() {
     setIsCreate(false);
   };
 
+  const onModifyCard = (id) => {
+    setVoteInfo(findVoteInfo(id, voteData));
+    setIsModify(state => !state);
+  }
+
+  const modifyVote = (data) => {
+    console.log(data);
+    sortVoteList(updateVoteList(data, voteData));
+    setIsModify(false);
+  };
+
+  const onDetailCard = (id) => {
+    setVoteInfo(findVoteInfo(id, voteData));
+    setIsDetail(state => !state);
+  }
+
   const deleteVote = () => {
     if(selectItemId) {
       setIsPopup(state => !state);
@@ -53,6 +53,13 @@ function App() {
       sortVoteList(deleteVoteList(selectItemId, voteData));
     }
   };
+
+  const onOpenPopup = (text,id) => {
+    setPopupText(text);
+    setSelectItemId(id);
+		setIsPopup(state => !state);
+  };
+
 
   const updateVote = (data) => {
     sortVoteList(updateVoteList(data, voteData));
@@ -84,7 +91,7 @@ function App() {
           <CardList title={'종료된 투표'} isEndVote cardList={endVote} user={user} onDetailCard={onDetailCard} />
         </Container>
         {
-          isCreate && <CreateCardModal user={user} onOpenPopup={onOpenPopup} addVote={addVote} onClose={() => setIsCreate(false)} />
+          isCreate && <CreateCardModal user={user} addVote={addVote} onClose={() => setIsCreate(false)} />
         }
         {
           isPopup && <Popup text={popupText} btnName={'삭제'} onConfirm={deleteVote} onClose={onOpenPopup} />
@@ -93,7 +100,7 @@ function App() {
           isDetail && <DetailCardModal data={voteInfo} onClose={onDetailCard}/>
         }
         {
-          isModify && <ModifyCardModal data={voteInfo} onClose={onModifyCard}/>
+          isModify && <ModifyCardModal data={voteInfo} modifyVote={modifyVote} onClose={onModifyCard}/>
         }
       </ToastProvider>
     </div>

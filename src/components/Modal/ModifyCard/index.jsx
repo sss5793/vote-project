@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useToasts } from 'react-toast-notifications';
 import { findUser, formatDate } from '../../../utils';
 
 import Wrapper from '../Wrapper';
@@ -19,21 +20,44 @@ const ScrollView = styled.div`
   margin-bottom: 20px;
 `;
 
-const ModifyCard = ({data, onClose}) => {
+const ModifyCard = ({data, modifyVote, onClose}) => {
   const [title, setTitle] = useState(data[0].title);
-  const { startDate, endDate, voteItem, userId } = data[0];
+  const [voteItem, setVoteItem] = useState(data[0].voteItem);
+  const { startDate, endDate, userId } = data[0];
   const user = findUser(userId);
-
-  const onChange = (e) => {
-    console.log(e.target);
-  }
-
-  const onDelete = (id) => {
-    console.log(id);
-  }
+	const { addToast } = useToasts();
 
   const onChangeTitle = (e) => {
     setTitle(e.target.value);
+  }
+
+  const onChangeVoteItem = (e) => {
+    setVoteItem(state => state.map(item => {
+      if(item.id === parseInt(e.target.id)){
+        return {
+          ...item,
+          name: e.target.value
+        }
+      }
+      return item 
+    }));
+  }
+
+  const onModify = () => {
+    if(!title) return addToast('제목을 입력해주세요.', {
+      appearance: 'error',
+      autoDismiss: true,
+    });
+    const updateData = {
+      ...data[0],
+      title,
+      voteItem
+    };
+    modifyVote(updateData);
+    addToast('투표가 수정되었습니다.', {
+      appearance: 'success',
+      autoDismiss: true,
+    });
   }
 
   return (
@@ -47,11 +71,11 @@ const ModifyCard = ({data, onClose}) => {
           <ItemHeader title={'투표 항목'} />
           <ScrollView>
             {
-              voteItem.map(item => <Item key={item.id} value={item.name} id={item.id} onDelete={onDelete} onChange={onChange}/>)
+              voteItem.map(item => <Item key={item.id} value={item.name} id={item.id} onChange={onChangeVoteItem}/>)
             }
           </ScrollView>
         </div>
-        <Buttons btnName={'생성'} onClose={onClose} onConfirm={onClose}/>
+        <Buttons btnName={'수정'} onClose={onClose} onConfirm={onModify}/>
       </ContentLayout>
     </Wrapper>
   );
