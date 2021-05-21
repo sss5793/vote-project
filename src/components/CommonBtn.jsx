@@ -9,6 +9,7 @@ const Button = styled.button`
   border: 0;
   font-size: 16px;
   font-weight: 600;
+  flex-shrink: 0;
 `;
 
 const CommonBtn = ({name, onClick, bgColor, color}) => (
