@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { findUser, formatDate } from '../../../utils';
 
 import Wrapper from '../Wrapper';
 import Title from '../Title';
@@ -19,11 +20,16 @@ const ScrollView = styled.div`
 `;
 
 const ModifyCard = ({data, onClose}) => {
-  const [title, setTitle] = useState('');
-  // const { title, startDate, endDate, voteItem, userId, totalVoteCnt } = data[0];
+  const [title, setTitle] = useState(data[0].title);
+  const { startDate, endDate, voteItem, userId } = data[0];
+  const user = findUser(userId);
 
-  const onConfirm = (e) => {
-    setTitle(e.target.value);
+  const onChange = (e) => {
+    console.log(e.target);
+  }
+
+  const onDelete = (id) => {
+    console.log(id);
   }
 
   const onChangeTitle = (e) => {
@@ -35,12 +41,14 @@ const ModifyCard = ({data, onClose}) => {
       <Title>투표 수정</Title>
       <ContentLayout>
         <Input value={title} onChange={onChangeTitle} label={'제목'}/>
-        <ReadInput title={'생성자'} value={'생성자'}/>
-        <ReadInput title={'기간'} value={'제목'}/>
+        <ReadInput title={'생성자'} value={user[0].name}/>
+        <ReadInput title={'기간'} value={`${formatDate(startDate)} ~ ${formatDate(endDate)}`}/>
         <div>
           <ItemHeader title={'투표 항목'} />
           <ScrollView>
-            <Item value={'항목 1'}/>
+            {
+              voteItem.map(item => <Item key={item.id} value={item.name} id={item.id} onDelete={onDelete} onChange={onChange}/>)
+            }
           </ScrollView>
         </div>
         <Buttons btnName={'생성'} onClose={onClose} onConfirm={onClose}/>

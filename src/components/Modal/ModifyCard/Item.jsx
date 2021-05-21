@@ -17,11 +17,11 @@ const ItemInput = styled.input`
   border: 1px solid #E5E5E5;
 `;
 
-const Item = ({value, onChange}) => {
+const Item = ({value, id, onChange, onDelete}) => {
   return (
     <Wrapper>
-      <ItemInput />
-      <button>
+      <ItemInput value={value} id={id} onChange={onChange}/>
+      <button type={'button'} onClick={() => onDelete(id)}>
         <Delete />
       </button>
     </Wrapper>
