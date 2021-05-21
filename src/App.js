@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import { Header, Container, CardList, CreateCard, Popup, DetailCard } from './components';
+import { Header, Container, CardList, CreateCardModal, Popup, DetailCardModal, ModifyCardModal } from './components';
 import { users, voteList } from './mocks';
 import { makeVoteId, formatVoteList, findVoteInfo, updateVoteList, deleteVoteList } from './utils';
 import { ToastProvider } from 'react-toast-notifications';
@@ -78,14 +78,15 @@ function App() {
           <CardList title={'종료된 투표'} isEndVote cardList={endVote} user={user} onDetailCard={onDetailCard} />
         </Container>
         {
-          isCreate && <CreateCard user={user} onOpenPopup={onOpenPopup} addVote={addVote} onClose={() => setIsCreate(false)} />
+          isCreate && <CreateCardModal user={user} onOpenPopup={onOpenPopup} addVote={addVote} onClose={() => setIsCreate(false)} />
         }
         {
           isPopup && <Popup text={popupText} btnName={'삭제'} onConfirm={deleteVote} onClose={onOpenPopup} />
         }
         {
-          isDetail && <DetailCard data={voteInfo} onClose={onDetailCard}/>
+          isDetail && <DetailCardModal data={voteInfo} onClose={onDetailCard}/>
         }
+        <ModifyCardModal />
       </ToastProvider>
     </div>
   );

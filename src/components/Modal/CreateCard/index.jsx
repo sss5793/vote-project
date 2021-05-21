@@ -6,9 +6,9 @@ import Wrapper from '../Wrapper';
 import Title from '../Title';
 import ContentLayout from '../ContentLayout';
 
-import Input from './Input';
+import Input from '../Input';
 import DatePicker from './DatePicker';
-import Buttons from './Buttons';
+import Buttons from '../Buttons';
 import VoteItem from './VoteItem'
 import { makeVoteData } from '../../../utils';
 
@@ -85,8 +85,8 @@ const CreateCard = ({user, addVote, onClose, onOpenPopup}) => {
           onAddItem={onAddItem} 
           onRemoveItem={onRemoveItem}
         />
+        <Buttons btnName={'생성'} onClose={onClose} onConfirm={onCreate}/>
       </ContentLayout>
-      <Buttons onClose={onClose} onCreate={onCreate}/>
     </Wrapper>
   )
 }

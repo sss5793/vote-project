@@ -32,7 +32,7 @@ const WrapperComp = (props) => {
 }
 
 WrapperComp.defaultProps = {
-  height: '592px'
+  height: '602px'
 }
 
 export default WrapperComp;

@@ -1,10 +1,8 @@
 import styled from 'styled-components';
-import BtnWrapper from '../BtnWrapper';
-import CommonBtn from '../../CommonBtn';
+import BtnWrapper from './BtnWrapper';
+import CommonBtn from '../CommonBtn';
 
 const Wrapper = styled(BtnWrapper)`
-  padding: 0 20px 20px 0;
-
   button {
     margin: 0 10px;
   }
@@ -14,10 +12,10 @@ const Wrapper = styled(BtnWrapper)`
   }
 `;
 
-const Buttons = ({onClose, onCreate}) => {
+const Buttons = ({onClose, onConfirm, btnName}) => {
   return (
     <Wrapper>
-      <CommonBtn name={'생성'} onClick={onCreate}/>
+      <CommonBtn name={btnName} onClick={onConfirm}/>
       <CommonBtn name={'닫기'} onClick={onClose} bgColor={'#e5e5e5'} color={'#000'}/>
   </Wrapper>
   )

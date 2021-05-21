@@ -8,7 +8,7 @@ import ContentLayout from '../ContentLayout';
 import BtnWrapper from '../BtnWrapper';
 
 import CommonBtn from '../../CommonBtn';
-import Input from './Input';
+import ReadInput from '../ReadInput';
 import VoteItem from './VoteItem';
 import VoteResult from './VoteResult';
 
@@ -44,9 +44,9 @@ const DetailCard = ({data, onClose}) => {
     <Wrapper height={'522px'}>
       <Title>투표 상세보기</Title>
       <ContentLayout>
-        <Input title={'제목'} value={title}/>
-        <Input title={'생성자'} value={user[0].name}/>
-        <Input title={'기간'} value={`${formatDate(startDate)} ~ ${formatDate(endDate)}`}/>
+        <ReadInput title={'제목'} value={title}/>
+        <ReadInput title={'생성자'} value={user[0].name}/>
+        <ReadInput title={'기간'} value={`${formatDate(startDate)} ~ ${formatDate(endDate)}`}/>
         <VoteResult result={result.name}/>
         <ScrollView>
           {

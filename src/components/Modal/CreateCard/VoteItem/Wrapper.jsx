@@ -1,18 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import CommonBtn from '../../../CommonBtn';
-
-const ItemList = styled.section`
-  margin-top: 10px;
-`;
-
-const ItemListTitle = styled.div`
-  display: flex;
-  align-items:center;
-  justify-content: space-between;
-  border-bottom: 1px solid #E5E5E5;
-  padding-bottom: 20px;
-`;
+import ItemHeader from '../../ItemHeader';
 
 const ScrollView = styled.div`
   border-bottom: 1px solid #E5E5E5;
@@ -47,10 +36,8 @@ const Wrapper = (props) => {
   }
 
   return (
-    <ItemList>
-      <ItemListTitle>
-        <p>항목 (최소 3개 이상)</p>
-      </ItemListTitle>
+    <section>
+      <ItemHeader title={'항목 (최소 3개 이상)'}/>
       <AddItem>
         <ItemInput value={itemValue} onChange={onChange} placeholder={'항목을 입력해주세요.'}/>
         <CommonBtn onClick={onAdd} name={'추가'} />
@@ -58,7 +45,7 @@ const Wrapper = (props) => {
       <ScrollView>
         {props.children}
       </ScrollView>
-    </ItemList>
+    </section>
   )
 }
 
