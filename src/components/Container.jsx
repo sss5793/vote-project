@@ -7,6 +7,8 @@ const Wrapper = styled.section`
   height: 100%;
 	padding: 20px;
 	background-color: #e5e5e5;
+	max-width: 1280px;
+	margin: 0 auto;
 `
 
 const UserInfo = styled.h1`
