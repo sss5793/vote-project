@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/voteProject/static/css/main.f7f0cbb7.chunk.css",
-    "main.js": "/voteProject/static/js/main.3b15a02c.chunk.js",
-    "main.js.map": "/voteProject/static/js/main.3b15a02c.chunk.js.map",
+    "main.css": "/voteProject/static/css/main.a84efeca.chunk.css",
+    "main.js": "/voteProject/static/js/main.0cef151f.chunk.js",
+    "main.js.map": "/voteProject/static/js/main.0cef151f.chunk.js.map",
     "runtime-main.js": "/voteProject/static/js/runtime-main.3830f679.js",
     "runtime-main.js.map": "/voteProject/static/js/runtime-main.3830f679.js.map",
     "static/js/2.f56f1589.chunk.js": "/voteProject/static/js/2.f56f1589.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.30395cb3.chunk.js": "/voteProject/static/js/3.30395cb3.chunk.js",
     "static/js/3.30395cb3.chunk.js.map": "/voteProject/static/js/3.30395cb3.chunk.js.map",
     "index.html": "/voteProject/index.html",
-    "static/css/main.f7f0cbb7.chunk.css.map": "/voteProject/static/css/main.f7f0cbb7.chunk.css.map",
+    "static/css/main.a84efeca.chunk.css.map": "/voteProject/static/css/main.a84efeca.chunk.css.map",
     "static/js/2.f56f1589.chunk.js.LICENSE.txt": "/voteProject/static/js/2.f56f1589.chunk.js.LICENSE.txt",
     "static/media/arrow_down.eca67a56.svg": "/voteProject/static/media/arrow_down.eca67a56.svg",
     "static/media/arrow_up.5b19f08e.svg": "/voteProject/static/media/arrow_up.5b19f08e.svg",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.3830f679.js",
     "static/js/2.f56f1589.chunk.js",
-    "static/css/main.f7f0cbb7.chunk.css",
-    "static/js/main.3b15a02c.chunk.js"
+    "static/css/main.a84efeca.chunk.css",
+    "static/js/main.0cef151f.chunk.js"
   ]
 }
