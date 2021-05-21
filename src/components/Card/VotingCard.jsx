@@ -55,6 +55,7 @@ const Card = (props) => {
 		// 사용자 정보 투표 항목에 넣기
 		const updateData = {
 			...data,
+			totalVoteCnt: data.totalVoteCnt + 1,
 			voterList: [ ...data.voterList, user.userId],
 			voteItem : data.voteItem.map(item => {
 				if(item.id === parseInt(voteItemId)){
