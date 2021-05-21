@@ -9,6 +9,7 @@ function App() {
   const [user, setUser] = useState(users[0]);
   const [voteData, setVoteData] = useState([]);
   const [isCreate, setIsCreate] = useState(false);
+  const [isModify, setIsModify] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
   const [isDetail, setIsDetail] = useState(false);
   const [voteInfo, setVoteInfo] = useState({});
@@ -20,6 +21,11 @@ function App() {
   const onDetailCard = (id) => {
     setVoteInfo(findVoteInfo(id, voteData));
     setIsDetail(state => !state);
+  }
+
+  const onModifyCard = (id) => {
+    setVoteInfo(findVoteInfo(id, voteData));
+    setIsModify(state => !state);
   }
 
   const onOpenPopup = (text,id) => {
@@ -74,7 +80,7 @@ function App() {
       <ToastProvider placement={'top-center'}>
         <Header users={users} name={user.name} onChangeUser={onChangeUser}/>
         <Container user={user} onHeaderBtnClick={() => setIsCreate(true)}>
-          <CardList title={'진행중인 투표'} cardList={progressVote} user={user} updateVote={updateVote} deleteVote={onOpenPopup} onDetailCard={onDetailCard} />
+          <CardList title={'진행중인 투표'} cardList={progressVote} user={user} updateVote={updateVote} deleteVote={onOpenPopup} onModifyCard={onModifyCard} onDetailCard={onDetailCard} />
           <CardList title={'종료된 투표'} isEndVote cardList={endVote} user={user} onDetailCard={onDetailCard} />
         </Container>
         {
@@ -86,7 +92,9 @@ function App() {
         {
           isDetail && <DetailCardModal data={voteInfo} onClose={onDetailCard}/>
         }
-        <ModifyCardModal />
+        {
+          isModify && <ModifyCardModal data={voteInfo} onClose={onModifyCard}/>
+        }
       </ToastProvider>
     </div>
   );
