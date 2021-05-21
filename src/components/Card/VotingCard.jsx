@@ -19,7 +19,7 @@ const Card = (props) => {
 	const { addToast } = useToasts();
 	const [value, setValue] = useState('선택해 주세요.');
 	const [voteItemId, setVoteItemId] = useState('');
-	const { data, user, onDetailCard, updateVote } = props;
+	const { data, user, onDetailCard, updateVote, deleteVote } = props;
 	const creator = users.filter(item => item.userId === data.userId);
 	const isClosed = user.name !== creator[0].name;
 
@@ -30,7 +30,7 @@ const Card = (props) => {
 
 	const onDelete = (e) => {
 		e.stopPropagation();
-		console.log('삭제');
+		deleteVote('정말로 삭제하시겠습니까?',data.id);
 	};
 
 	const onChangeItem = (target) => {

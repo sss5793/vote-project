@@ -77,3 +77,8 @@ export const updateVoteList = (data, list) => {
     return item
   })
 }
+
+// 투표 삭제
+export const deleteVoteList = (id, list) => {
+  return list.filter(item => item.id !== id)
+}

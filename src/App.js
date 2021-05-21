@@ -2,17 +2,18 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import { Header, Container, CardList, CreateCard, Popup, DetailCard } from './components';
 import { users, voteList } from './mocks';
-import { makeVoteId, formatVoteList, findVoteInfo, updateVoteList } from './utils';
+import { makeVoteId, formatVoteList, findVoteInfo, updateVoteList, deleteVoteList } from './utils';
 import { ToastProvider } from 'react-toast-notifications';
 
 function App() {
   const [user, setUser] = useState(users[0]);
+  const [voteData, setVoteData] = useState([]);
   const [isCreate, setIsCreate] = useState(false);
   const [isPopup, setIsPopup] = useState(false);
   const [isDetail, setIsDetail] = useState(false);
   const [voteInfo, setVoteInfo] = useState({});
   const [popupText, setPopupText] = useState(false);
-  const [voteData, setVoteData] = useState([]);
+  const [selectItemId, setSelectItemId] = useState('');
   const [endVote, setEndVote] = useState([]);
   const [progressVote, setProgressVote] = useState([]);
 
@@ -21,8 +22,9 @@ function App() {
     setIsDetail(state => !state);
   }
 
-  const onOpenPopup = (text) => {
+  const onOpenPopup = (text,id) => {
     setPopupText(text);
+    setSelectItemId(id);
 		setIsPopup(state => !state);
   };
 
@@ -36,6 +38,14 @@ function App() {
     const newVoteData = { id, ...data};
     sortVoteList([...voteData, newVoteData]);
     setIsCreate(false);
+  };
+
+  const deleteVote = () => {
+    if(selectItemId) {
+      setIsPopup(state => !state);
+      // TODO: 삭제 되었습니다. 팝업
+      sortVoteList(deleteVoteList(selectItemId, voteData));
+    }
   };
 
   const updateVote = (data) => {
@@ -64,14 +74,14 @@ function App() {
       <ToastProvider placement={'top-center'}>
         <Header users={users} name={user.name} onChangeUser={onChangeUser}/>
         <Container user={user} onHeaderBtnClick={() => setIsCreate(true)}>
-          <CardList title={'진행중인 투표'} cardList={progressVote} user={user} updateVote={updateVote} onDetailCard={onDetailCard} />
+          <CardList title={'진행중인 투표'} cardList={progressVote} user={user} updateVote={updateVote} deleteVote={onOpenPopup} onDetailCard={onDetailCard} />
           <CardList title={'종료된 투표'} isEndVote cardList={endVote} user={user} onDetailCard={onDetailCard} />
         </Container>
         {
           isCreate && <CreateCard user={user} onOpenPopup={onOpenPopup} addVote={addVote} onClose={() => setIsCreate(false)} />
         }
         {
-          isPopup && <Popup isConfirm text={popupText} onClose={onOpenPopup} />
+          isPopup && <Popup text={popupText} btnName={'삭제'} onConfirm={deleteVote} onClose={onOpenPopup} />
         }
         {
           isDetail && <DetailCard data={voteInfo} onClose={onDetailCard}/>
