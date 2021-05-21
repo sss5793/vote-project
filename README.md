@@ -8,7 +8,7 @@
 - styled-components(css in js)
 - dayjs
 - react-toast-notifications
-- jest - 테스트
+- react-testing-library
 
 ## 기능
 - 투표 생성
