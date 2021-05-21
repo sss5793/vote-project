@@ -5,7 +5,7 @@ import Wrapper from '../Wrapper';
 import Title from '../Title';
 import ContentLayout from '../ContentLayout';
 
-import Input from './Input';
+import Input from '../Input';
 import DatePicker from './DatePicker';
 import Buttons from './Buttons';
 import VoteItem from './VoteItem'
